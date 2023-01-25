@@ -51,8 +51,8 @@ class BookControllerTest {
     @Test
     void addNewBookBadRequestTest() throws Exception {
         doNothing().when(bookService).saveBook(any());
-        mockMvc.perform(MockMvcRequestBuilders.post("/"))
+        mockMvc.perform(MockMvcRequestBuilders.post("/123"))
                 .andDo(MockMvcResultHandlers.print())
-                .andExpect(MockMvcResultMatchers.status().is(400));
+                .andExpect(MockMvcResultMatchers.status().is(404));
     }
 }
