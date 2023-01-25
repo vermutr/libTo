@@ -32,7 +32,7 @@ class BookControllerTest {
         List<BookDto> bookDtoList = List.of(new BookDto("title", "author", 2022));
         when(bookService.getAllBooks()).thenReturn(bookDtoList);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/book"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().json("[{\"title\":\"title\",\"author\":\"author\", \"bookYear\":2022}]"));
     }
@@ -40,7 +40,7 @@ class BookControllerTest {
     @Test
     void addNewBookTest() throws Exception {
         doNothing().when(bookService).saveBook(any());
-        mockMvc.perform(MockMvcRequestBuilders.post("/")
+        mockMvc.perform(MockMvcRequestBuilders.post("/book")
                         .accept(MediaType.APPLICATION_JSON)
                         .content("{\"title\":\"title\",\"author\":\"author\", \"bookYear\":2022}")
                         .contentType(MediaType.APPLICATION_JSON))
